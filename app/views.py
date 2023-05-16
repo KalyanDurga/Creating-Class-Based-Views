@@ -56,6 +56,31 @@ class CBV_form(View):
 
 # this is template view
 
+class CBT_template(TemplateView):
+    template_name='CBT_template.html'
+
+    def get_context_data(self, **kwargs):
+        CO=super().get_context_data(**kwargs)
+        TFO=Topicform()
+        WFO=Webpageform()
+        CO['TFO']=TFO
+        CO['WFO']=WFO
+
+        return CO
+    
+    def post(self,request):
+        TD=Topicform(request.POST)
+        WD=Webpageform(request.POST)
+        if TD.is_valid() and WD.is_valid():
+            TFD=TD.save(commit=False)
+            TFD.save()
+
+            WFD=WD.save(commit=False)
+            WFD.topic_name=TFD
+            WFD.save()
+            return HttpResponse('data submited')
+        else:
+            return HttpResponse('data is not valid')
             
 
 

@@ -26,4 +26,5 @@ urlpatterns = [
     path('fbv_form/',fbv_form,name='fbv_form'),
     path('CBV_form/',CBV_form.as_view(),name='CBV_form'),
     
+    path('CBT_template/',CBT_template.as_view(),name='CBT_template'),
 ]
